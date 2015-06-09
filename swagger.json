@@ -1,0 +1,144 @@
+{
+	"swagger": "2.0",
+	"info": {
+		"title": "xMatters Scheduling API",
+		"description": "The xMatters Scheduling API",
+		"version": "1.0.0-alpha"
+	},
+	"host": "api.xmatters.com",
+	"basePath": "/api/scheduling/1",
+	"schemes": [
+		"https"
+	],
+	"consumes": [
+		"application/json"
+	],
+	"produces": [
+		"application/json"
+	],
+	"paths": {
+		"/devices": {
+			"post": {
+				"tags": [
+					"Webhooks"
+				],
+				"summary": "Add a Webhook",
+				"description": "Add a Webhook",
+				"operationId": "postWebhooks",
+				"parameters": [
+					{
+						"name": "body",
+						"in": "body",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/WebhookPost"
+						}
+					}
+				],
+				"responses": {
+					"201": {
+						"description": "Created",
+						"schema": {
+							"$ref": "#/definitions/Webhook"
+						}
+					},
+					"400": {
+						"description": "Bad Request",
+						"schema": {
+							"$ref": "#/definitions/Response"
+						}
+					},
+					"401": {
+						"description": "Unauthorized",
+						"schema": {
+							"$ref": "#/definitions/Response"
+						}
+					},
+					"403": {
+						"description": "Forbidden",
+						"schema": {
+							"$ref": "#/definitions/Response"
+						}
+					},
+					"409": {
+						"description": "Conflict",
+						"schema": {
+							"$ref": "#/definitions/Response"
+						}
+					},
+					"429": {
+						"description": "Too Many Requests",
+						"schema": {
+							"$ref": "#/definitions/Response"
+						}
+					},
+					"500": {
+						"description": "Internal Error",
+						"schema": {
+							"$ref": "#/definitions/Response"
+						}
+					}
+				}
+			}
+		}
+	},
+	"definitions": {
+		"Request": {
+			"type": "object",
+			"properties": {
+				"method": {
+					"type": "string",
+					"enum": ["GET", "POST", "PUT", "PATCH", "DELETE"]
+				},
+				"url": {
+					"type": "string"
+				},
+				"headers": {
+					"type": "object"
+				},
+				"body": {
+					"type": "string"
+				}
+			},
+			"required": [
+				"method",
+				"url"
+			]
+		},
+		"Webhook": {
+			"type": "object",
+			"properties": {
+				"id": {
+					"type": "string"
+				},
+				"request": {
+					"$ref": "#/definitions/Request"
+				},
+				"at": {
+					"type": "string",
+					"format": "date-time"
+				}
+			},
+			"required": [
+				"request",
+				"at"
+			]
+		},
+		"WebhookPost": {
+			"type": "object",
+			"properties": {
+				"request": {
+					"$ref": "#/definitions/Request"
+				},
+				"at": {
+					"type": "string",
+					"format": "date-time"
+				}
+			},
+			"required": [
+				"request",
+				"at"
+			]
+		}
+	}
+}
