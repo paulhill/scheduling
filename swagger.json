@@ -106,6 +106,44 @@
 				"url"
 			]
 		},
+		"Response": {
+			"description": "A coded API response",
+			"properties": {
+				"code": {
+					"type": "integer",
+					"format": "int32",
+					"enum": [
+						400,
+						401,
+						403,
+						404,
+						409,
+						429,
+						500
+					]
+				},
+				"reason": {
+					"type": "string",
+					"enum": [
+						"Bad Request",
+						"Unauthorized",
+						"Forbidden",
+						"Not Found",
+						"Conflict",
+						"Too Many Requests",
+						"Internal Server Error"
+					]
+				},
+				"message": {
+					"type": "string"
+				}
+			},
+			"required": [
+				"code",
+				"reason",
+				"message"
+			]
+		},
 		"Webhook": {
 			"type": "object",
 			"properties": {
